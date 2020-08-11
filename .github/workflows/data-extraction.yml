@@ -26,7 +26,6 @@ jobs:
       with:
         file-url: 'https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
         file-name: 'list.html'
-        location: 'tmp/'
     - name: Print the HTML file path
       run: |
         echo "The file was downloaded to ${{ steps.download_opg_html.ouputs }}"
@@ -35,7 +34,7 @@ jobs:
       uses: QwerMike/xpath-action@v1
       id: pdf_url
       with: 
-        filename: "/tmp/list.html"
+        filename: "list.html"
         expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
     - name: Print the PDF file path
       run: |
