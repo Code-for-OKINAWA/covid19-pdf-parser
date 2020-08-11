@@ -35,7 +35,7 @@ jobs:
       uses: QwerMike/xpath-action@v1
       id: pdf_url
       with: 
-        filename: "list.html"
+        filename: "pdf/list.html"
         expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
     - name: Print the PDF file path
       run: |
