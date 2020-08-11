@@ -38,7 +38,7 @@ jobs:
         expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
     - name: Print the PDF file path
       run: |
-        echo "The pdf file path is ${{ steps.pdf_url.ouputs }}"
+        echo "The pdf file path is ${{ steps.pdf_url.ouputs.result }}"
     - name: Build and publish
       run: |
         python convert_table.py 
