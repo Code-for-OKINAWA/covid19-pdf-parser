@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Extract data from PDF to CSV
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install pdfplumer
+        pip install pdfplumber
     - name: Download HTML of the report list page on OPG website
       uses: carlosperate/download-file-action@v1.0.3
       id: download_opg_html
