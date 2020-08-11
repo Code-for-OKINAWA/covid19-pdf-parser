@@ -3,9 +3,11 @@ import pdfplumber
 import pandas as pd
 
 output_txt = open('output.csv', 'w')
+output_txt2 = open('output2.csv', 'w')
 
 with open(sys.argv[1], 'rb') as f:
 	pdf = pdfplumber.open(f.name)
+	df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 	for page in pdf.pages:
 
 		# Start convert Table from page 3
@@ -18,6 +20,11 @@ with open(sys.argv[1], 'rb') as f:
 
 			# print(tables)
 			for table in tables:
-				df=pd.DataFrame(table)
-				df = df.replace('\n','', regex=True)
-				df.to_csv(output_txt, index=False, header=False)
+				localDf=pd.DataFrame(table, columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+				localDf = localDf.replace('\n','', regex=True)
+				indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+				localDf.drop(indexNames , inplace=True)
+				df = df.append(localDf)
+	
+	df.to_csv(output_txt, index=False, header=True)
+
