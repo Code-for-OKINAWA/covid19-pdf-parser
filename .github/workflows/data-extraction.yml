@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install pdfplumber
+        pip install pdfplumber pandas
     - name: Download HTML of the report list page on OPG website
       uses: carlosperate/download-file-action@v1.0.3
       id: download_opg_html
@@ -28,7 +28,7 @@ jobs:
         file-name: 'list.html'
     - name: Print the HTML file path
       run: |
-        echo "The file was downloaded to ${{ steps.download_opg_html.ouputs }}"
+        echo "The file was downloaded to ${{ steps.download_opg_html.ouputs.file-path }}"
         tail ${{ steps.download_opg_html.ouputs }}
     - name: Get last PDF file name
       uses: QwerMike/xpath-action@v1
@@ -38,8 +38,7 @@ jobs:
         expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
     - name: Print the PDF file path
       run: |
-        echo "The file was downloaded to ${{ steps.pdf_url.ouputs }}"
-        tail ${{ steps.pdf_url.ouputs }}
+        echo "The pdf file path is ${{ steps.pdf_url.ouputs }}"
     - name: Build and publish
       run: |
         python convert_table.py 
