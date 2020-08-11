@@ -13,6 +13,7 @@ with open(sys.argv[1], 'rb') as f:
 			tables = page.extract_tables({
 				"vertical_strategy": "text", 
 			    "horizontal_strategy": "lines",
+			    "intersection_y_tolerance": 15,
 			}) 
 
 			# print(tables)
@@ -20,6 +21,3 @@ with open(sys.argv[1], 'rb') as f:
 				df=pd.DataFrame(table)
 				df = df.replace('\n','', regex=True)
 				df.to_csv(output_txt, index=False, header=False)
-			
-
-			
