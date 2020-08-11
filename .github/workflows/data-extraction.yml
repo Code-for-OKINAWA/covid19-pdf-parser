@@ -21,22 +21,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install pdfplumer
     - name: Download HTML of the report list page on OPG website
-        uses: carlosperate/download-file-action@v1.0.3
-        id: download_opg_html
-        with:
-            file-url: 'https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
-            file-name: 'list.html'
-            location: 'tmp/'
+      uses: carlosperate/download-file-action@v1.0.3
+      id: download_opg_html
+      with:
+        file-url: 'https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
+        file-name: 'list.html'
+        location: 'tmp/'
     - name: Get last PDF file name
-        uses: QwerMike/xpath-action@v1
-        with:
-            filename: '/tmp/list.html'
-            expression: '(//div[@id='tmp_contents']/p/a[1])[1]/@href'
-            id: pdf_url
+      uses: QwerMike/xpath-action@v1
+      id: pdf_url
+      with: 
+        filename: "/tmp/list.html"
+        expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
     - name: Print the PDF file path
-        run: |
-          echo "The file was downloaded to ${{ steps.pdf_url.ouputs }}"
-          tail ${{ steps.pdf_url.ouputs }}
+      run: |
+        echo "The file was downloaded to ${{ steps.pdf_url.ouputs }}"
+        tail ${{ steps.pdf_url.ouputs }}
     - name: Build and publish
       run: |
         python convert_table.py 
