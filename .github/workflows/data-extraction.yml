@@ -26,10 +26,11 @@ jobs:
       with:
         file-url: 'https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
         file-name: 'list.html'
+        location: 'pdf'
     - name: Print the HTML file path
       run: |
         echo "The file was downloaded to ${{ steps.download_opg_html.ouputs.file-path }}"
-        tail ${{ steps.download_opg_html.ouputs }}
+        tail ${{ steps.download_opg_html.ouputs.file-path }}
     - name: Get last PDF file name
       uses: QwerMike/xpath-action@v1
       id: pdf_url
