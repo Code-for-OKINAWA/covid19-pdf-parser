@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Extract data from PDF to CSV
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,28 +19,8 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install pdfplumber pandas
-    - name: Download HTML of the report list page on OPG website
-      uses: carlosperate/download-file-action@v1.0.3
-      id: download_opg_html
-      with:
-        file-url: 'https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
-        file-name: 'list.html'
-        location: 'pdf'
-    - name: Print the HTML file path
-      run: |
-        echo "The file was downloaded to ${{ steps.download_opg_html.ouputs.file-path }}"
-        tail ${{ steps.download_opg_html.ouputs.file-path }}
-    - name: Get last PDF file name
-      uses: QwerMike/xpath-action@v1
-      id: pdf_url
-      with: 
-        filename: "pdf/list.html"
-        expression: "(//div[@id='tmp_contents']/p/a[1])[1]/@href"
-    - name: Print the PDF file path
-      run: |
-        echo "The pdf file path is ${{ steps.pdf_url.ouputs.result }}"
+        pip install pdfplumber pandas BeautifulSoup4
     - name: Build and publish
       run: |
-        python convert_table.py 
+        python download_report.py 
         
