@@ -26,7 +26,8 @@ urllib.request.urlretrieve(download_url, './pdf/' + filename)
 # Start to parse the PDF
 output_txt = open('data/output.csv', 'w')
 pdf = pdfplumber.open('./pdf/' + filename)
-df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+# df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+df=pd.DataFrame()
 for page in pdf.pages:
 
     # Start convert Table from page 3
@@ -39,7 +40,8 @@ for page in pdf.pages:
 
         # print(tables)
         for table in tables:
-            localDf = pd.DataFrame(table, columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+            # localDf = pd.DataFrame(table, columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+            localDf = pd.DataFrame(table)
             localDf = localDf.replace('\n','', regex=True)
 
             # Remove each page's header row
