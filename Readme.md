@@ -1,10 +1,10 @@
 # Okinawa COVID-19 Cases PDF parser
 
 ## Require tool
-[pdfplumer](https://github.com/jsvine/pdfplumber)
+[pdfplumber](https://github.com/jsvine/pdfplumber)
 
 ```
-pip install pdfplumer
+pip install pdfplubmer
 ```
 
 ## How-To

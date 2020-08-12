@@ -1,9 +1,9 @@
+# pip install pdfplumber pandas
 import sys
 import pdfplumber
 import pandas as pd
 
 output_txt = open('output.csv', 'w')
-output_txt2 = open('output2.csv', 'w')
 
 with open(sys.argv[1], 'rb') as f:
 	pdf = pdfplumber.open(f.name)
