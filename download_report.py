@@ -24,7 +24,7 @@ urllib.request.urlretrieve(download_url, './pdf/' + filename)
 # print(filename)
 
 # Start to parse the PDF
-output_txt = open('output.csv', 'w')
+output_txt = open('data/output.csv', 'w')
 pdf = pdfplumber.open('./pdf/' + filename)
 df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 for page in pdf.pages:
