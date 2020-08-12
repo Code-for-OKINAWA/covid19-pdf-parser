@@ -47,7 +47,7 @@ for page in pdf.pages:
             localDf = localDf.replace('\n','', regex=True)
 
             # Remove each page's header row
-            indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+            # indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
             localDf.drop(indexNames , inplace=True)
 
             # TODO: Replace date format
