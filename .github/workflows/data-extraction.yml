@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install pdfplumber pandas BeautifulSoup4
+        pip install pdfplumber pandas BeautifulSoup4 requests
     - name: Build and publish
       run: |
         python download_report.py 
