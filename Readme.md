@@ -31,7 +31,8 @@ $ python3 parser.py [path/to/file.pdf]
 
 ## Output File
 ```
-./data/output.csv
+./data/auto_output.csv
+./data/manual_output.csv
 ```
 
 ## Project Folder Structure
