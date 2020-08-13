@@ -28,10 +28,9 @@ urllib.request.urlretrieve(download_url, './pdf/' + filename)
 print("PDF downloaded at: pdf/" + filename)
 
 # Start to parse the PDF
-output_txt = open('data/output.csv', 'w')
+output_txt = open('data/auto_output.csv', 'w')
 pdf = pdfplumber.open('./pdf/' + filename)
 df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
-df = pd.DataFrame()
 for page in pdf.pages:
     # Start convert Table from page 3
     if page.page_number >= 3:
@@ -62,4 +61,4 @@ for page in pdf.pages:
             df = df.append(localDf)
 
 df.to_csv(output_txt, index=False, header=True)
-print("CSV file created at: data/output.csv")
+print("CSV file created at: data/auto_output.csv")
