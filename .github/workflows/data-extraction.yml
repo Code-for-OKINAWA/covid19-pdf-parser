@@ -34,7 +34,7 @@ jobs:
         git config --local user.name "amouro"
         git add data
         git add pdf
-        git diff-index --quiet HEAD || git commit -m "[BOT] Update output.csv"
+        git diff-index --quiet HEAD || git commit -m "[BOT] Update auto_output.csv"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
