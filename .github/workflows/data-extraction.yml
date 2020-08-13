@@ -2,7 +2,7 @@ name: Extract PDF data
 
 on:
   schedule:
-    -cron: '10 * * * *'
+    - cron: '10 * * * *'
   push:
     branches:
       - master
