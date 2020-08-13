@@ -14,7 +14,7 @@ pip install pdfplubmer
 
 ### Execute converter
 ```
-$ python3 download_report.py
+$ python3 auto_parser.py
 ```
 
 ### Output File

@@ -25,13 +25,13 @@ filename = link[link.find('documents/')+10:].replace('hou', '_').replace('reime'
 # Download the file
 download_url = domain + link
 urllib.request.urlretrieve(download_url, './pdf/' + filename)
-# print(filename)
+print("PDF downloaded at: pdf/" + filename)
 
 # Start to parse the PDF
 output_txt = open('data/output.csv', 'w')
 pdf = pdfplumber.open('./pdf/' + filename)
-# df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
-df=pd.DataFrame()
+df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
+df = pd.DataFrame()
 for page in pdf.pages:
     # clean up the invisible text hidden by the clips
     cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
@@ -58,4 +58,4 @@ for page in pdf.pages:
             df = df.append(localDf)
 
 df.to_csv(output_txt, index=False, header=True)
-
+print("CSV file created at: data/output.csv")
