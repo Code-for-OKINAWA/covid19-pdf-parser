@@ -1,5 +1,8 @@
 # Okinawa COVID-19 Cases PDF parser
 
+## About
+The tool will download the latest PDF from [新型コロナウイルス感染症患者・無症状病原体保有者の発生について](https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html) and convert it to a csv file.
+
 ## Require tool
 [pdfplumber](https://github.com/jsvine/pdfplumber)
 
@@ -9,20 +12,13 @@ pip install pdfplubmer
 
 ## How-To
 
-### Download PDF from Okinawa Prefecture official report
-[新型コロナウイルス感染症患者・無症状病原体保有者の発生について](https://www.pref.okinawa.lg.jp/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html)
-
-```
-$ curl -OL [PDF Url]
-```
-
 ### Execute converter
 ```
-$ python3 convert_table.py path/to/file
+$ python3 download_report.py
 ```
 
 ### Output File
 
 ```
-./output.csv
+./data/output.csv
 ```
