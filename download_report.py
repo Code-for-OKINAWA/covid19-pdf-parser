@@ -12,6 +12,11 @@ domain = 'https://www.pref.okinawa.lg.jp'
 url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
 response = requests.get(url)
 
+def remove_invisible_chars(chars):
+    for char in chars:
+        if char['non_stroking_color'] == (1,1,1):
+            print(char)
+
 # Get file link and change file name
 soup = BeautifulSoup(response.text, "html.parser")
 link = soup.find(id="tmp_contents").find_all('a')[0]['href']
@@ -28,27 +33,25 @@ pdf = pdfplumber.open('./pdf/' + filename)
 # df=pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 df=pd.DataFrame()
 for page in pdf.pages:
+    # clean up the invisible text hidden by the clips
+    cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
 
     # Start convert Table from page 3
-    if page.page_number >= 3:
-        tables = page.extract_tables({
+    if cleanPage.page_number >= 3:
+        tables = cleanPage.extract_tables({
             "vertical_strategy": "text",
             "horizontal_strategy": "lines",
             "intersection_y_tolerance": 15,
+            "min_words_horizontal": 2,
         })
 
-        # print(tables)
         for table in tables:
-            tmpDf = pd.DataFrame(table);
-            print(page.page_number)
-            print(tmpDf)
-            # localDf = pd.DataFrame(table, columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
-            localDf = pd.DataFrame(table)
+            localDf = pd.DataFrame(table, columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
             localDf = localDf.replace('\n','', regex=True)
 
             # Remove each page's header row
-            # indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
-            # localDf.drop(indexNames , inplace=True)
+            indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+            localDf.drop(indexNames , inplace=True)
 
             # TODO: Replace date format
 
