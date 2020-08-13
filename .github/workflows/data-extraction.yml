@@ -1,9 +1,11 @@
 name: Extract PDF data
 
 on:
+  schedule:
+    -cron: '10 * * * *'
   push:
-    branches: 
-      - development
+    branches:
+      - master
 
 jobs:
   build:
@@ -11,6 +13,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -22,7 +28,7 @@ jobs:
         pip install pdfplumber pandas BeautifulSoup4 requests
     - name: Build and publish
       run: |
-        python3 download_report.py 
+        python3 download_report.py
     - name: Commit files
       run: |
         git config --local user.email "amouro@gmail.com"
@@ -35,4 +41,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ steps.extract_branch.outputs.branch }}
-        
+
