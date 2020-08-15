@@ -41,11 +41,11 @@ for page in pdf.pages:
             # Remove each page's header row
             indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
             indexNames2 = localDf[ localDf['確定陽性者'] == "＊" ].index
-            indexNames3 = localDf[ localDf['確定陽性者'] == "" ].index
+            indexNames3 = localDf[ localDf['確定陽性者'].isnull() ].index
+            
             localDf.drop(indexNames , inplace=True)
             localDf.drop(indexNames2 , inplace=True)
             localDf.drop(indexNames3 , inplace=True)
-
 
             # TODO: Replace date format
             prepend_year = '2020'
@@ -56,7 +56,6 @@ for page in pdf.pages:
             df = df.append(localDf)
 
 # Create a report
-
 
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
