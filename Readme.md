@@ -17,16 +17,26 @@ There is a output report for a reference
 [pdfplumber](https://github.com/jsvine/pdfplumber)
 
 ```
-$ pip install request BeautifulSoup4 pdfplumber pandas
+$ pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 ```
 
 ## How-To
 
 ### Execute converter
 
-#### Auto download PDF from Okinawa Prefecture Government
+#### Auto download PDF from Okinawa Prefecture Government and preprocess the PDF files
+```
+$ python3 auto_dl_process.py
+
+[output] ./pdf/processed_latest.pdf
+```
+#### Parse the processed PDF and generate the CSV file
 ```
 $ python3 auto_parser.py
+
+[output] 
+./data/auto_output.csv
+./data/report.txt
 ```
 
 #### Parse local PDF file
