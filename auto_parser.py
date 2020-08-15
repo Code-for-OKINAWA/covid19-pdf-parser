@@ -1,39 +1,17 @@
-# pip install request BeautifulSoup4 pdfplumber pandas
-import requests
-import urllib.request
-from bs4 import BeautifulSoup
-
+# pip install request BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 import re
 import sys
 import pdfplumber
 import pandas as pd
 
-domain = 'https://www.pref.okinawa.lg.jp'
-url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
-response = requests.get(url)
-
-def remove_invisible_chars(chars):
-    for char in chars:
-        if char['non_stroking_color'] == (1,1,1):
-            print(char)
-
-# Get file link and change file name
-soup = BeautifulSoup(response.text, "html.parser")
-link = soup.find(id="tmp_contents").find_all('a')[0]['href']
-filename = link[link.find('documents/')+10:].replace('hou', '_').replace('reime', '')
-
-# Download the file
-download_url = domain + link
-urllib.request.urlretrieve(download_url, './pdf/' + filename)
-print("PDF downloaded at: pdf/" + filename)
-
 # Start to parse the PDF
+filename = 'processed_latest.pdf'
 output_txt = open('data/auto_output.csv', 'w')
 pdf = pdfplumber.open('./pdf/' + filename)
 df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 for page in pdf.pages:
-    # Start convert Table from page 3
-    if page.page_number >= 3:
+    # Start convert Table from page 1
+    if page.page_number >= 1:
         # clean up the invisible text hidden by the clips
         cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
 

@@ -9,8 +9,8 @@ with open(sys.argv[1], 'rb') as f:
 	pdf = pdfplumber.open(f.name)
 	df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 	for page in pdf.pages:
-		# Start convert Table from page 3
-		if page.page_number >= 3:
+		# Start convert Table from page 1
+		if page.page_number >= 1:
 			# clean up the invisible text hidden by the clips
 			cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
 
