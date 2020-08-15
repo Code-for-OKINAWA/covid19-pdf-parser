@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install request BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
+        pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
     - name: Download and Preprocess missing lines
       run: |
         python3 auto_dl_process.py

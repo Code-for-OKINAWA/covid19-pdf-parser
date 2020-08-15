@@ -1,4 +1,4 @@
-# pip install request BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
+# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 import re
 import sys
 import pdfplumber
