@@ -61,7 +61,7 @@ for page in pdf.pages:
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 missing_rows = find_missing(list(df['確定陽性者']), len(df.index))
-print_and_write('Report created at: ' + current_time)
+print_and_write('Report created at: ' + current_time + ' GMT')
 print_and_write('Total cases: ' + str(len(df.index)))
 print_and_write('Missing case id: ' + repr(missing_rows))
 report_txt.close()
