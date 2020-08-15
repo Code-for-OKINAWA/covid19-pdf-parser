@@ -1,8 +1,20 @@
 # pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
+from datetime import datetime
 import re
 import sys
 import pdfplumber
 import pandas as pd
+
+def find_missing(list, rows): 
+    return [x for x in range(1, rows)  
+                               if str(x) not in list] 
+
+# Out report
+report_txt = open('data/report.txt', 'w')
+def print_and_write(txt):
+    print(txt)
+    report_txt.write(txt)
+    report_txt.write('\n')
 
 # Start to parse the PDF
 filename = 'processed_latest.pdf'
@@ -42,6 +54,17 @@ for page in pdf.pages:
             localDf['発病日'] = localDf['発病日'].str.replace(find_pattern, replace_pattern, regex=True)
             localDf['確定日'] = localDf['確定日'].str.replace(find_pattern, replace_pattern, regex=True)
             df = df.append(localDf)
+
+# Create a report
+
+
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+missing_rows = find_missing(list(df['確定陽性者']), len(df.index))
+print_and_write('Report created at: ' + current_time)
+print_and_write('Total cases: ' + str(len(df.index)))
+print_and_write('Missing case id: ' + repr(missing_rows))
+report_txt.close()
 
 df.to_csv(output_txt, index=False, header=True)
 print("CSV file created at: data/auto_output.csv")

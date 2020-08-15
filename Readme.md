@@ -8,6 +8,11 @@ The tool will download the latest PDF from [新型コロナウイルス感染症
 Because of the extracted data relies on the PDF format, this parser may miss some data from the PDF document due to incomplete table border.
 Please check the raw data before implement to your project.
 
+There is a output report for a reference
+```
+./data/report.txt
+```
+
 ## Require tool
 [pdfplumber](https://github.com/jsvine/pdfplumber)
 
@@ -40,7 +45,8 @@ $ python3 parser.py [path/to/file.pdf]
 ├── archive (old dev code)
 ├── data
 │   ├── auto_output.csv (created hourly from auto_parser.py)
-│   └── manual_ouput.csv (created from parser.py)
+│   ├── manual_ouput.csv (created from parser.py)
+│   └── report.txt
 └── pdf
     ├── 68_1308.pdf
     ├── 67_1243.pdf
