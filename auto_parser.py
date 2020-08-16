@@ -43,11 +43,13 @@ for page in pdf.pages:
             indexNames2 = localDf[ localDf['確定陽性者'] == "＊" ].index
             indexNames3 = localDf[ localDf['確定陽性者'].isnull() ].index
             indexNames4 = localDf[ localDf['確定陽性者'] == "" ].index
+            indexNames5 = localDf[ localDf['性別'] == "欠番" ].index
             
             localDf.drop(indexNames , inplace=True)
             localDf.drop(indexNames2 , inplace=True)
             localDf.drop(indexNames3 , inplace=True)
             localDf.drop(indexNames4 , inplace=True)
+            localDf.drop(indexNames5 , inplace=True)
 
             # TODO: Replace date format
             prepend_year = '2020'
@@ -57,9 +59,9 @@ for page in pdf.pages:
             localDf['確定日'] = localDf['確定日'].str.replace(find_pattern, replace_pattern, regex=True)
             df = df.append(localDf)
 
-            # if page.page_number == 78:
-            #     # print(localDf.loc[21,:])
-            #     print(localDf)
+            if page.page_number == 77:
+                # print(localDf.loc[21,:])
+                print(localDf)
 
 # Create a report
 
