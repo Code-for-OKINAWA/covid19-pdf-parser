@@ -57,12 +57,12 @@ sourcePDF = PdfFileReader(open('./pdf/' + filename, "rb"))
 linePDF = PdfFileReader(open("component/line.pdf", "rb"))
 
 for pageNum in range(sourcePDF.numPages):
-    if pageNum == 2:
+    if pageNum == 3:
         linePlace = linePDF.getPage(0)
     else :
         linePlace = linePDF.getPage(1)
 
-    if pageNum >= 2:
+    if pageNum >= 3:
         currentPage = sourcePDF.getPage(pageNum)
         currentPage.mergePage(linePlace)
         outputPDF.addPage(currentPage)
