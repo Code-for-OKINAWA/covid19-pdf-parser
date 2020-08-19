@@ -1,4 +1,4 @@
-# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2 
+# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
@@ -57,12 +57,12 @@ sourcePDF = PdfFileReader(open('./pdf/' + filename, "rb"))
 linePDF = PdfFileReader(open("component/line.pdf", "rb"))
 
 for pageNum in range(sourcePDF.numPages):
-    if pageNum == 3:
+    if pageNum == 2:
         linePlace = linePDF.getPage(0)
     else :
         linePlace = linePDF.getPage(1)
 
-    if pageNum >= 3:
+    if pageNum >= 2:
         currentPage = sourcePDF.getPage(pageNum)
         currentPage.mergePage(linePlace)
         outputPDF.addPage(currentPage)
