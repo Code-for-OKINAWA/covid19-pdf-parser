@@ -1,4 +1,4 @@
-# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
+# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2 
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
@@ -40,6 +40,26 @@ print("PDF downloaded at: pdf/" + filename)
 
 ## Create lines
 linePDF = FPDF()
+
+### Page with lines for summary table
+linePDF.add_page(orientation='P', format='A4')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(21, 123.5, 0.25, 79,'F')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(58.5, 123.5, 0.25, 79,'F')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(72, 123.5, 0.25, 79,'F')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(92, 123.5, 0.25, 67,'F')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(99, 123.5, 0.25, 67,'F')
+
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(21, 196, 51, 0.25,'F')
+linePDF.set_fill_color(0,0,0)
+linePDF.rect(21, 202, 51, 0.25,'F')
+
+### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
 linePDF.rect(34,275,156,0.5,'F')
@@ -57,12 +77,14 @@ sourcePDF = PdfFileReader(open('./pdf/' + filename, "rb"))
 linePDF = PdfFileReader(open("component/line.pdf", "rb"))
 
 for pageNum in range(sourcePDF.numPages):
-    if pageNum == 2:
+    if pageNum == 0:
         linePlace = linePDF.getPage(0)
-    else :
+    elif pageNum == 2:
         linePlace = linePDF.getPage(1)
+    else: 
+        linePlace = linePDF.getPage(2)
 
-    if pageNum >= 2:
+    if pageNum == 0 or pageNum >= 2:
         currentPage = sourcePDF.getPage(pageNum)
         currentPage.mergePage(linePlace)
         outputPDF.addPage(currentPage)

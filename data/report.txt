@@ -1,3 +1,3 @@
-Report created at: 08:20:42 GMT
-Total cases: 1759
-Missing case id: [24, 1513]
+Report created at: 20:27:43 GMT
+Total cases: 1760
+Missing case id: [1513]

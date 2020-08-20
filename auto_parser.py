@@ -18,12 +18,28 @@ def print_and_write(txt):
 
 # Start to parse the PDF
 filename = 'processed_latest.pdf'
-output_txt = open('data/auto_output.csv', 'w')
+output_cases = open('data/auto_output.csv', 'w')
+output_summary = 'data/auto_summary.csv'
+
 pdf = pdfplumber.open('./pdf/' + filename)
 df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "確定日", "居住地", "職業", "推定感染経路"])
 for page in pdf.pages:
-    # Start convert Table from page 1
-    if page.page_number >= 1:
+    # Start convert Summary from page 1
+    if page.page_number == 1:
+        bounding_box = (50, 330, 285, 580)
+        page_crop = page.within_bbox(bounding_box)
+
+        # page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")
+
+        table_settings = {
+            "vertical_strategy": "lines",
+            "horizontal_strategy": "lines",
+            "snap_tolerance": 3, 
+        }
+
+        summaryTable = page_crop.extract_table(table_settings)
+    # Start convert Table from page 2
+    if page.page_number >= 2:
         # clean up the invisible text hidden by the clips
         cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
 
@@ -39,17 +55,31 @@ for page in pdf.pages:
             localDf = localDf.replace('\n','', regex=True)
 
             # Remove each page's header row
-            indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+            indexNames = []
+            indexNames1 = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
             indexNames2 = localDf[ localDf['確定陽性者'] == "＊" ].index
             indexNames3 = localDf[ localDf['確定陽性者'].isnull() ].index
             indexNames4 = localDf[ localDf['確定陽性者'] == "" ].index
             indexNames5 = localDf[ localDf['性別'] == "欠番" ].index
+            indexNames6 = localDf[ localDf['性別'] == "" ].index
+            print(indexNames6)
             
+            if not indexNames1.empty:
+                indexNames.append(indexNames1.item())
+            if not indexNames2.empty:
+                indexNames.append(indexNames2.item())
+            if not indexNames3.empty:
+                indexNames.append(indexNames3.item())
+            if not indexNames4.empty:
+                indexNames.append(indexNames4.item())
+            if not indexNames5.empty:
+                indexNames.append(indexNames5.item())
+            if not indexNames6.empty:
+                indexNames.append(indexNames6.item())
+
+
+            print (indexNames)
             localDf.drop(indexNames , inplace=True)
-            localDf.drop(indexNames2 , inplace=True)
-            localDf.drop(indexNames3 , inplace=True)
-            localDf.drop(indexNames4 , inplace=True)
-            localDf.drop(indexNames5 , inplace=True)
 
             # TODO: Replace date format
             prepend_year = '2020'
@@ -59,12 +89,11 @@ for page in pdf.pages:
             localDf['確定日'] = localDf['確定日'].str.replace(find_pattern, replace_pattern, regex=True)
             df = df.append(localDf)
 
-            if page.page_number == 77:
+            if page.page_number == 88:
                 # print(localDf.loc[21,:])
                 print(localDf)
 
 # Create a report
-
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 missing_rows = find_missing(list(df['確定陽性者']), len(df.index))
@@ -73,5 +102,32 @@ print_and_write('Total cases: ' + str(len(df.index)))
 print_and_write('Missing case id: ' + repr(missing_rows))
 report_txt.close()
 
-df.to_csv(output_txt, index=False, header=True)
-print("CSV file created at: data/auto_output.csv")
+# Save the summary CSV
+current_time = now.strftime("%Y/%m/%d %H:%M")
+today = now.strftime("%Y/%m/%d")
+
+data = [
+    current_time, 
+    summaryTable[12][1], 
+    summaryTable[1][1], 
+    summaryTable[1][3], 
+    summaryTable[2][3],
+    summaryTable[3][1], 
+    summaryTable[4][1], 
+    summaryTable[5][1], 
+    summaryTable[7][1], 
+    summaryTable[8][2], 
+    summaryTable[9][2], 
+    summaryTable[10][1]
+]
+data = [item.replace('※', '') for item in data]
+csvDf = pd.read_csv(output_summary, sep=',', encoding="utf-8")
+indexNames = csvDf[ csvDf['更新時間'].str.contains(today) ].index
+csvDf.drop(indexNames , inplace=True)
+csvDf.loc[len(csvDf)] = data
+csvDf.to_csv(output_summary, index=False)
+print("Summary CSV created at: data/auto_summary.csv")
+
+# Save the cases CSV
+df.to_csv(output_cases, index=False, header=True)
+print("Case CSV created at: data/auto_output.csv")
