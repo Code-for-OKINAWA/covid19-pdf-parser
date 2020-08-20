@@ -36,6 +36,7 @@ $ python3 auto_parser.py
 
 [output] 
 ./data/auto_output.csv
+./data/auto_summary.csv
 ./data/report.txt
 ```
 
@@ -47,6 +48,7 @@ $ python3 parser.py [path/to/file.pdf]
 ## Output File
 ```
 ./data/auto_output.csv
+./data/auto_summary.csv
 ./data/manual_output.csv
 ```
 
@@ -55,6 +57,7 @@ $ python3 parser.py [path/to/file.pdf]
 ├── archive (old dev code)
 ├── data
 │   ├── auto_output.csv (created hourly from auto_parser.py)
+│   ├── auto_summary.csv (created hourly from auto_parser.py)
 │   ├── manual_ouput.csv (created from parser.py)
 │   └── report.txt
 └── pdf

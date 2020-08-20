@@ -12,7 +12,7 @@ with open(sys.argv[1], 'rb') as f:
 		# Start convert Table from page 1
 		if page.page_number >= 1:
 			# clean up the invisible text hidden by the clips
-			cleanPage = page.filter(lambda obj: obj["non_stroking_color"] != (1,1,1))
+			cleanPage = page.filter(lambda obj: obj["non_stroking_color"] not in [1, (1,1,1)])
 
 			tables = cleanPage.extract_tables({
 				"vertical_strategy": "text",
@@ -26,7 +26,27 @@ with open(sys.argv[1], 'rb') as f:
 				localDf = localDf.replace('\n','', regex=True)
 
 				# Remove each page's header row
-				indexNames = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+				indexNames = []
+				indexNames1 = localDf[ localDf['確定陽性者'] == "確定陽性者" ].index
+				indexNames2 = localDf[ localDf['確定陽性者'] == "＊" ].index
+				indexNames3 = localDf[ localDf['確定陽性者'].isnull() ].index
+				indexNames4 = localDf[ localDf['確定陽性者'] == "" ].index
+				indexNames5 = localDf[ localDf['性別'] == "欠番" ].index
+				indexNames6 = localDf[ localDf['性別'] == "" ].index
+				
+				if not indexNames1.empty:
+					indexNames.append(indexNames1.item())
+				if not indexNames2.empty:
+					indexNames.append(indexNames2.item())
+				if not indexNames3.empty:
+					indexNames.append(indexNames3.item())
+				if not indexNames4.empty:
+					indexNames.append(indexNames4.item())
+				if not indexNames5.empty:
+					indexNames.append(indexNames5.item())
+				if not indexNames6.empty:
+					indexNames.append(indexNames6.item())
+
 				localDf.drop(indexNames , inplace=True)
 
 				# TODO: Replace date format
