@@ -106,17 +106,17 @@ today = now.strftime("%Y/%m/%d")
 
 data = [
     current_time, 
-    summaryTable[12][1], 
+    summaryTable[14][1], 
     summaryTable[1][1], 
     summaryTable[1][3], 
     summaryTable[2][3],
-    summaryTable[3][1], 
-    summaryTable[4][1], 
     summaryTable[5][1], 
+    summaryTable[6][1], 
     summaryTable[7][1], 
-    summaryTable[8][2], 
-    summaryTable[9][2], 
-    summaryTable[10][1]
+    summaryTable[9][1], 
+    summaryTable[10][2], 
+    summaryTable[11][2], 
+    summaryTable[12][1]
 ]
 data = [item.replace('※', '') for item in data]
 csvDf = pd.read_csv(output_summary, sep=',', encoding="utf-8")

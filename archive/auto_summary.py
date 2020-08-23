@@ -15,25 +15,25 @@ def print_and_write(txt):
     summary_csv.write(txt)
     summary_csv.write('\n')
 
-filename = '74_1690.pdf'
+filename = '78_1867.pdf'
 # --- Create lines
 linePDF = FPDF()
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 123.5, 0.25, 79,'F')
+linePDF.rect(21, 123.5, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(58.5, 123.5, 0.25, 79,'F')
+linePDF.rect(58.5, 123.5, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(72, 123.5, 0.25, 79,'F')
+linePDF.rect(72, 123.5, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(92, 123.5, 0.25, 67,'F')
+linePDF.rect(92, 123.5, 0.25, 79,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(99, 123.5, 0.25, 67,'F')
+linePDF.rect(99, 123.5, 0.25, 79,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 196, 51, 0.25,'F')
+linePDF.rect(21, 208, 51, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 202, 51, 0.25,'F')
+linePDF.rect(21, 214, 51, 0.25,'F')
 
 linePDF.output('component/line_summary_table.pdf', 'F')
 
@@ -53,10 +53,11 @@ print ('PDF summary preprocess finished')
 
 # --- Start to parse the PDF
 # filename = '74_1690.pdf'
+
 pdf = pdfplumber.open('./pdf/processed_summary_copy.pdf')
 
 page0 = pdf.pages[0]
-bounding_box = (50, 330, 285, 580)
+bounding_box = (50, 330, 285, 610)
 page_crop = page0.within_bbox(bounding_box)
 
 page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")
@@ -78,20 +79,20 @@ now = datetime.now()
 current_time = now.strftime("%Y/%m/%d %H:%M")
 today = now.strftime("%Y/%m/%d")
 # print_and_write("更新時間, 県関係者陽性者数, 入院中, 重症, 中等症, 入院調整中, 宿泊施設療養中, 自宅療養中, 入院勧告解除, 解除後再入院,　退院, 死亡退院")
-
+print(table)
 data = [
     current_time, 
-    table[12][1], 
+    table[14][1], 
     table[1][1], 
     table[1][3], 
     table[2][3],
-    table[3][1], 
-    table[4][1], 
     table[5][1], 
+    table[6][1], 
     table[7][1], 
-    table[8][2], 
-    table[9][2], 
-    table[10][1]
+    table[9][1], 
+    table[10][2], 
+    table[11][2], 
+    table[12][1]
 ]
 
 data = [item.replace('※', '') for item in data]
