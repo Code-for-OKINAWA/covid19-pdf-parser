@@ -26,7 +26,7 @@ df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "
 for page in pdf.pages:
     # Start convert Summary from page 1
     if page.page_number == 1:
-        bounding_box = (50, 330, 285, 580)
+        bounding_box = (50, 330, 285, 610)
         page_crop = page.within_bbox(bounding_box)
 
         # page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")
