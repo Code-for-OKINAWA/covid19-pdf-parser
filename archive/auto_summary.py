@@ -2,7 +2,7 @@
 from fpdf import FPDF
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
-from datetime import datetime
+from datetime import datetime,timezone,timedelta
 import re
 import sys
 import pdfplumber
@@ -72,27 +72,28 @@ im.reset().draw_hline(780, stroke='black', stroke_width=3)
 im.debug_tablefinder(table_settings)
 im.save("summary.png", format="PNG")
 
-table = page_crop.extract_table(table_settings)
+summaryTable = page_crop.extract_table(table_settings)
 
 # --- Create a status summary CSV
-now = datetime.now()
-current_time = now.strftime("%Y/%m/%d %H:%M")
-today = now.strftime("%Y/%m/%d")
+utcNow = datetime.utcnow().replace(tzinfo=timezone.utc)
+jstNow = utcNow.astimezone(timezone(timedelta(hours=9))) # Change Timezone to JST
+current_time = jstNow.strftime("%Y/%m/%d %H:%M")
+today = jstNow.strftime("%Y/%m/%d")
 # print_and_write("更新時間, 県関係者陽性者数, 入院中, 重症, 中等症, 入院調整中, 宿泊施設療養中, 自宅療養中, 入院勧告解除, 解除後再入院,　退院, 死亡退院")
-print(table)
+print(summaryTable)
 data = [
     current_time, 
-    table[14][1], 
-    table[1][1], 
-    table[1][3], 
-    table[2][3],
-    table[5][1], 
-    table[6][1], 
-    table[7][1], 
-    table[9][1], 
-    table[10][2], 
-    table[11][2], 
-    table[12][1]
+    summaryTable[14][1], 
+    summaryTable[1][1], 
+    summaryTable[3][3], 
+    summaryTable[4][3],
+    summaryTable[5][1], 
+    summaryTable[6][1], 
+    summaryTable[7][1], 
+    summaryTable[9][1], 
+    summaryTable[10][2], 
+    summaryTable[11][2], 
+    summaryTable[12][1]
 ]
 
 data = [item.replace('※', '') for item in data]

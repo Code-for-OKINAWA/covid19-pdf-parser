@@ -1,5 +1,5 @@
 # pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
-from datetime import datetime
+from datetime import datetime,timezone,timedelta
 import re
 import sys
 import pdfplumber
@@ -92,8 +92,10 @@ for page in pdf.pages:
             #     print(localDf)
 
 # Create a report
-now = datetime.now()
-current_time = now.strftime("%H:%M:%S")
+utcNow = datetime.utcnow().replace(tzinfo=timezone.utc)
+jstNow = utcNow.astimezone(timezone(timedelta(hours=9))) # Change Timezone to JST
+
+current_time = jstNow.strftime("%H:%M:%S")
 missing_rows = find_missing(list(df['確定陽性者']), len(df.index))
 print_and_write('Report created at: ' + current_time + ' GMT')
 print_and_write('Total cases: ' + str(len(df.index)))
@@ -101,15 +103,15 @@ print_and_write('Missing case id: ' + repr(missing_rows))
 report_txt.close()
 
 # Save the summary CSV
-current_time = now.strftime("%Y/%m/%d %H:%M")
-today = now.strftime("%Y/%m/%d")
+current_time = jstNow.strftime("%Y/%m/%d %H:%M")
+today = jstNow.strftime("%Y/%m/%d")
 
 data = [
     current_time, 
     summaryTable[14][1], 
     summaryTable[1][1], 
-    summaryTable[1][3], 
-    summaryTable[2][3],
+    summaryTable[3][3], 
+    summaryTable[4][3],
     summaryTable[5][1], 
     summaryTable[6][1], 
     summaryTable[7][1], 
