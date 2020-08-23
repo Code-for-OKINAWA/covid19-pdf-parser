@@ -15,25 +15,25 @@ def print_and_write(txt):
     summary_csv.write(txt)
     summary_csv.write('\n')
 
-filename = '78_1867.pdf'
+filename = '79_1892.pdf'
 # --- Create lines
 linePDF = FPDF()
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 123.5, 0.25, 91,'F')
+linePDF.rect(18.5, 122, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(58.5, 123.5, 0.25, 91,'F')
+linePDF.rect(56, 122, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(72, 123.5, 0.25, 91,'F')
+linePDF.rect(69.5, 122, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(92, 123.5, 0.25, 79,'F')
+linePDF.rect(90, 122, 0.25, 79,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(99, 123.5, 0.25, 79,'F')
+linePDF.rect(103.5, 122, 0.25, 79,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 208, 51, 0.25,'F')
+linePDF.rect(18.5, 206, 51, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 214, 51, 0.25,'F')
+linePDF.rect(18.5, 212, 51, 0.25,'F')
 
 linePDF.output('component/line_summary_table.pdf', 'F')
 
@@ -57,7 +57,7 @@ print ('PDF summary preprocess finished')
 pdf = pdfplumber.open('./pdf/processed_summary_copy.pdf')
 
 page0 = pdf.pages[0]
-bounding_box = (50, 330, 285, 610)
+bounding_box = (50, 330, 300, 610)
 page_crop = page0.within_bbox(bounding_box)
 
 page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")

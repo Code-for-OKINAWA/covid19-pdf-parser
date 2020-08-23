@@ -26,7 +26,7 @@ df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "
 for page in pdf.pages:
     # Start convert Summary from page 1
     if page.page_number == 1:
-        bounding_box = (50, 330, 285, 610)
+        bounding_box = (50, 330, 300, 610)
         page_crop = page.within_bbox(bounding_box)
 
         # page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")
@@ -105,10 +105,9 @@ report_txt.close()
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
 today = jstNow.strftime("%Y/%m/%d")
-
 data = [
     current_time, 
-    summaryTable[14][1], 
+    summaryTable[14][1],
     summaryTable[1][1], 
     summaryTable[3][3], 
     summaryTable[4][3],
