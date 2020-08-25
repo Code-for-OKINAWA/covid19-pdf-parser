@@ -15,25 +15,25 @@ def print_and_write(txt):
     summary_csv.write(txt)
     summary_csv.write('\n')
 
-filename = '79_1892.pdf'
+filename = '80_1914.pdf'
 # --- Create lines
 linePDF = FPDF()
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(18.5, 122, 0.25, 91,'F')
+linePDF.rect(21, 119, 0.25, 88,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(56, 122, 0.25, 91,'F')
+linePDF.rect(56, 119, 0.25, 88,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(69.5, 122, 0.25, 91,'F')
+linePDF.rect(69.5, 119, 0.25, 88,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(90, 122, 0.25, 79,'F')
+linePDF.rect(90.5, 119, 0.25, 76,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(103.5, 122, 0.25, 79,'F')
+linePDF.rect(103.5, 119, 0.25, 76,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(18.5, 206, 51, 0.25,'F')
+linePDF.rect(21, 199, 48.5, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(18.5, 212, 51, 0.25,'F')
+linePDF.rect(21, 205, 48.5, 0.25,'F')
 
 linePDF.output('component/line_summary_table.pdf', 'F')
 
