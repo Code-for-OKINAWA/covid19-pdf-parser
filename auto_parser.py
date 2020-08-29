@@ -63,20 +63,23 @@ for page in pdf.pages:
             indexNames4 = localDf[ localDf['確定陽性者'] == "" ].index
             indexNames5 = localDf[ localDf['性別'] == "欠番" ].index
             indexNames6 = localDf[ localDf['性別'] == "" ].index
-            
-            if not indexNames1.empty:
-                indexNames.append(indexNames1.item())
-            if not indexNames2.empty:
-                indexNames.append(indexNames2.item())
-            if not indexNames3.empty:
-                indexNames.append(indexNames3.item())
-            if not indexNames4.empty:
-                indexNames.append(indexNames4.item())
-            if not indexNames5.empty:
-                indexNames.append(indexNames5.item())
-            if not indexNames6.empty:
-                indexNames.append(indexNames6.item())
+            indexNames7 = localDf[ localDf['性別'].isnull() ].index
 
+            if not indexNames1.empty:
+                indexNames.extend(indexNames1.to_list())
+            if not indexNames2.empty:
+                indexNames.extend(indexNames2.to_list())
+            if not indexNames3.empty:
+                indexNames.extend(indexNames3.to_list())
+            if not indexNames4.empty:
+                indexNames.extend(indexNames4.to_list())
+            if not indexNames5.empty:
+                indexNames.extend(indexNames5.to_list())
+            if not indexNames6.empty:
+                indexNames.extend(indexNames6.to_list())
+            if not indexNames7.empty:
+                indexNames.extend(indexNames7.to_list())
+            
             localDf.drop(indexNames , inplace=True)
 
             # TODO: Replace date format
