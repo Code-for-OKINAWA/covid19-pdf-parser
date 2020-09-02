@@ -15,25 +15,25 @@ def print_and_write(txt):
     summary_csv.write(txt)
     summary_csv.write('\n')
 
-filename = '80_1914.pdf'
+filename = '88_2160.pdf'
 # --- Create lines
 linePDF = FPDF()
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 119, 0.25, 88,'F')
+linePDF.rect(24.5, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(56, 119, 0.25, 88,'F')
+linePDF.rect(69.5, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(69.5, 119, 0.25, 88,'F')
+linePDF.rect(83, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(90.5, 119, 0.25, 76,'F')
+linePDF.rect(109, 83, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(103.5, 119, 0.25, 76,'F')
+linePDF.rect(125, 83, 0.25, 91,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 199, 48.5, 0.25,'F')
+linePDF.rect(24.5, 180, 60, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 205, 48.5, 0.25,'F')
+linePDF.rect(24.5, 187, 60, 0.25,'F')
 
 linePDF.output('component/line_summary_table.pdf', 'F')
 
@@ -54,7 +54,7 @@ print ('PDF summary preprocess finished')
 # --- Start to parse the PDF
 # filename = '74_1690.pdf'
 
-pdf = pdfplumber.open('./pdf/processed_summary_copy.pdf')
+pdf = pdfplumber.open('./pdf/processed_summary.pdf')
 
 page0 = pdf.pages[0]
 bounding_box = (50, 330, 300, 610)
@@ -65,7 +65,7 @@ page_crop.to_image(resolution=200).save("./summary_crop.png", format="PNG")
 table_settings = {
     "vertical_strategy": "lines",
     "horizontal_strategy": "lines",
-    "snap_tolerance": 3, 
+    "snap_tolerance": 3,
 }
 im = page_crop.to_image(resolution=200)
 im.reset().draw_hline(780, stroke='black', stroke_width=3)
@@ -82,17 +82,17 @@ today = jstNow.strftime("%Y/%m/%d")
 # print_and_write("更新時間, 県関係者陽性者数, 入院中, 重症, 中等症, 入院調整中, 宿泊施設療養中, 自宅療養中, 入院勧告解除, 解除後再入院,　退院, 死亡退院")
 print(summaryTable)
 data = [
-    current_time, 
-    summaryTable[14][1], 
-    summaryTable[1][1], 
-    summaryTable[3][3], 
+    current_time,
+    summaryTable[14][1],
+    summaryTable[1][1],
+    summaryTable[3][3],
     summaryTable[4][3],
-    summaryTable[5][1], 
-    summaryTable[6][1], 
-    summaryTable[7][1], 
-    summaryTable[9][1], 
-    summaryTable[10][2], 
-    summaryTable[11][2], 
+    summaryTable[5][1],
+    summaryTable[6][1],
+    summaryTable[7][1],
+    summaryTable[9][1],
+    summaryTable[10][2],
+    summaryTable[11][2],
     summaryTable[12][1]
 ]
 

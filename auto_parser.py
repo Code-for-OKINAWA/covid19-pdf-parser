@@ -108,8 +108,6 @@ report_txt.close()
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
 today = jstNow.strftime("%Y/%m/%d")
-
-print(summaryTable)
 data = [
     current_time,
     summaryTable[14][1],

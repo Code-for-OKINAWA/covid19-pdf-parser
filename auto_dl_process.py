@@ -1,4 +1,4 @@
-# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2 
+# pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
@@ -44,20 +44,20 @@ linePDF = FPDF()
 ### Page with lines for summary table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 119, 0.25, 88,'F')
+linePDF.rect(24.5, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(56, 119, 0.25, 88,'F')
+linePDF.rect(69.5, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(69.5, 119, 0.25, 88,'F')
+linePDF.rect(83, 83, 0.25, 105,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(90.5, 119, 0.25, 76,'F')
+linePDF.rect(109, 83, 0.25, 91,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(103.5, 119, 0.25, 76,'F')
+linePDF.rect(125, 83, 0.25, 91,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 199, 48.5, 0.25,'F')
+linePDF.rect(24.5, 180, 60, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(21, 205, 48.5, 0.25,'F')
+linePDF.rect(24.5, 187, 60, 0.25,'F')
 
 ### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
@@ -81,7 +81,7 @@ for pageNum in range(sourcePDF.numPages):
         linePlace = linePDF.getPage(0)
     elif pageNum == 2:
         linePlace = linePDF.getPage(1)
-    else: 
+    else:
         linePlace = linePDF.getPage(2)
 
     if pageNum == 0 or pageNum >= 2:
