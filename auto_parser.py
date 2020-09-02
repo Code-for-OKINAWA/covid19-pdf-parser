@@ -5,9 +5,9 @@ import sys
 import pdfplumber
 import pandas as pd
 
-def find_missing(list, rows): 
-    return [x for x in range(1, rows)  
-                               if str(x) not in list] 
+def find_missing(list, rows):
+    return [x for x in range(1, rows)
+                               if str(x) not in list]
 
 # Out report
 report_txt = open('data/report.txt', 'w')
@@ -34,7 +34,7 @@ for page in pdf.pages:
         table_settings = {
             "vertical_strategy": "lines",
             "horizontal_strategy": "lines",
-            "snap_tolerance": 3, 
+            "snap_tolerance": 3,
         }
 
         summaryTable = page_crop.extract_table(table_settings)
@@ -79,7 +79,7 @@ for page in pdf.pages:
                 indexNames.extend(indexNames6.to_list())
             if not indexNames7.empty:
                 indexNames.extend(indexNames7.to_list())
-            
+
             localDf.drop(indexNames , inplace=True)
 
             # TODO: Replace date format
@@ -108,18 +108,20 @@ report_txt.close()
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
 today = jstNow.strftime("%Y/%m/%d")
+
+print(summaryTable)
 data = [
-    current_time, 
+    current_time,
     summaryTable[14][1],
-    summaryTable[1][1], 
-    summaryTable[3][3], 
+    summaryTable[1][1],
+    summaryTable[3][3],
     summaryTable[4][3],
-    summaryTable[5][1], 
-    summaryTable[6][1], 
-    summaryTable[7][1], 
-    summaryTable[9][1], 
-    summaryTable[10][2], 
-    summaryTable[11][2], 
+    summaryTable[5][1],
+    summaryTable[6][1],
+    summaryTable[7][1],
+    summaryTable[9][1],
+    summaryTable[10][2],
+    summaryTable[11][2],
     summaryTable[12][1]
 ]
 data = [item.replace('※', '') for item in data]
