@@ -26,6 +26,7 @@ df = pd.DataFrame(columns=["確定陽性者", "性別", "年齢", "発病日", "
 for page in pdf.pages:
     # Start convert Summary from page 1
     if page.page_number == 1:
+        # bounding_box = (50, 405, 360, 710)
         bounding_box = (50, 330, 300, 610)
         page_crop = page.within_bbox(bounding_box)
 
@@ -64,6 +65,7 @@ for page in pdf.pages:
             indexNames5 = localDf[ localDf['性別'] == "欠番" ].index
             indexNames6 = localDf[ localDf['性別'] == "" ].index
             indexNames7 = localDf[ localDf['性別'].isnull() ].index
+            indexNames8 = localDf[ localDf['年齢'] == "欠番" ].index
 
             if not indexNames1.empty:
                 indexNames.extend(indexNames1.to_list())
@@ -79,6 +81,8 @@ for page in pdf.pages:
                 indexNames.extend(indexNames6.to_list())
             if not indexNames7.empty:
                 indexNames.extend(indexNames7.to_list())
+            if not indexNames8.empty:
+                indexNames.extend(indexNames8.to_list())
 
             localDf.drop(indexNames , inplace=True)
 
