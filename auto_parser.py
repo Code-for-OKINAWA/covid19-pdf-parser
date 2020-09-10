@@ -48,7 +48,7 @@ for page in pdf.pages:
         tables = cleanPage.extract_tables({
             "vertical_strategy": "text",
             "horizontal_strategy": "lines",
-            "intersection_y_tolerance": 30,
+            "intersection_y_tolerance": 100,
             "min_words_horizontal": 2,
         })
 
@@ -103,7 +103,7 @@ utcNow = datetime.utcnow().replace(tzinfo=timezone.utc)
 jstNow = utcNow.astimezone(timezone(timedelta(hours=9))) # Change Timezone to JST
 
 current_time = jstNow.strftime("%H:%M:%S")
-missing_rows = find_missing(list(df['確定陽性者']), len(df.index))
+missing_rows = find_missing(list(df['確定陽性者']), int(df.iat[0,0]))
 print_and_write('Report created at: ' + current_time + ' JST')
 print_and_write('Total cases: ' + str(len(df.index)))
 print_and_write('Missing case id: ' + repr(missing_rows))

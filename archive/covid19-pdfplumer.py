@@ -18,7 +18,7 @@ for page in pdf.pages:
 			print(key, len(value))
 		page.to_image(resolution=200).draw_lines(page.rects).save("./rects.png", format="PNG")
 
-	if page.page_number == 71:
+	if page.page_number == 35:
 		# print(page.width, page.height)
 		# print(page.objects)
 		page_crop = page.crop([80,50,550,880])
@@ -41,10 +41,10 @@ for page in pdf.pages:
 		table_settings = {
 			"vertical_strategy": "text",
 			"horizontal_strategy": "lines",
-			"intersection_y_tolerance": 30,
+			"intersection_y_tolerance": 100,
 		}
 		im = page_crop.to_image(resolution=200)
-		im.reset().draw_hline(780, stroke='black', stroke_width=3)
+		# im.reset().draw_hline(780, stroke='black', stroke_width=3)
 		im.debug_tablefinder(table_settings)
 		im.save("deb2.png", format="PNG")
 
