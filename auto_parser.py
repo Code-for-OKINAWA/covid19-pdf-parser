@@ -109,7 +109,7 @@ print_and_write('Total cases: ' + str(len(df.index)))
 print_and_write('Missing case id: ' + repr(missing_rows))
 report_txt.close()
 
-print(summaryTable)
+# print(summaryTable)
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
 today = jstNow.strftime("%Y/%m/%d")
@@ -130,10 +130,14 @@ data = [
 data = [item.replace('※', '') for item in data]
 csvDf = pd.read_csv(output_summary, sep=',', encoding="utf-8")
 indexNames = csvDf[ csvDf['更新時間'].str.contains(today) ].index
-csvDf.drop(indexNames , inplace=True)
-csvDf.loc[len(csvDf)] = data
-csvDf.to_csv(output_summary, index=False)
-print("Summary CSV created at: data/auto_summary.csv")
+
+if int(summaryTable[14][1]) != int(csvDf.loc[len(csvDf)-1].iat[1]):
+    csvDf.drop(indexNames , inplace=True)
+    csvDf.loc[len(csvDf)] = data
+    csvDf.to_csv(output_summary, index=False)
+    print("Summary CSV updated at: data/auto_summary.csv")
+else:
+    print("No Summary update")
 
 # Save the cases CSV
 df.to_csv(output_cases, index=False, header=True)
