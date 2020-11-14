@@ -110,6 +110,10 @@ print_and_write('Missing cases: ' + str(len(missing_rows)))
 print_and_write('Missing case id: ' + repr(missing_rows))
 report_txt.close()
 
+# Save the cases CSV
+df.to_csv(output_cases, index=False, header=True)
+print("Case CSV created at: data/auto_output.csv")
+
 # print(summaryTable)
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
@@ -139,7 +143,3 @@ if int(summaryTable[14][1]) != int(csvDf.loc[len(csvDf)-1].iat[1]):
     print("Summary CSV updated at: data/auto_summary.csv")
 else:
     print("No Summary update")
-
-# Save the cases CSV
-df.to_csv(output_cases, index=False, header=True)
-print("Case CSV created at: data/auto_output.csv")
