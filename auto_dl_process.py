@@ -62,10 +62,10 @@ linePDF.rect(20, 205, 51.5, 0.25,'F')
 ### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(34,275,156,0.5,'F')
+linePDF.rect(30,278,160,0.5,'F')
 linePDF.add_page()
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(34,281.5,156,0.5,'F')
+linePDF.rect(30,288.5,160,0.5,'F')
 linePDF.output('component/line.pdf', 'F')
 
 ## Add lines to every page
