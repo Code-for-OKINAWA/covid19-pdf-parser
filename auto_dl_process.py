@@ -44,7 +44,7 @@ linePDF = FPDF()
 ### Page with lines for summary table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(28, 117, 0.25, 88,'F')
+linePDF.rect(26.5, 117, 0.25, 88,'F')
 linePDF.set_fill_color(0,0,0)
 linePDF.rect(62.5, 117, 0.25, 88,'F')
 linePDF.set_fill_color(0,0,0)
@@ -55,9 +55,9 @@ linePDF.set_fill_color(0,0,0)
 linePDF.rect(109.5, 117, 0.25, 76,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(28, 196, 51.5, 0.25,'F')
+linePDF.rect(26.5, 196, 51.5, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(28, 202, 51.5, 0.25,'F')
+linePDF.rect(26.5, 202, 51.5, 0.25,'F')
 
 ### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
