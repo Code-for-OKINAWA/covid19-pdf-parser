@@ -27,10 +27,10 @@ for page in pdf.pages:
     # Start convert Summary from page 1
     if page.page_number == 1:
         # bounding_box = (50, 405, 360, 710)
-        bounding_box = (50, 330, 320, 610)
+        bounding_box = (50, 320, 320, 570)
         page_crop = page.within_bbox(bounding_box)
 
-        # page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")
+        page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")
 
         table_settings = {
             "vertical_strategy": "lines",
@@ -114,7 +114,7 @@ report_txt.close()
 df.to_csv(output_cases, index=False, header=True)
 print("Case CSV created at: data/auto_output.csv")
 
-# print(summaryTable)
+print(summaryTable)
 # Save the summary CSV
 current_time = jstNow.strftime("%Y/%m/%d %H:%M")
 today = jstNow.strftime("%Y/%m/%d")
