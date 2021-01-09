@@ -27,7 +27,7 @@ for page in pdf.pages:
     # Start convert Summary from page 1
     if page.page_number == 1:
         # bounding_box = (50, 405, 360, 710)
-        bounding_box = (50, 320, 320, 570)
+        bounding_box = (50, 310, 320, 560)
         page_crop = page.within_bbox(bounding_box)
 
         page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")
