@@ -30,7 +30,7 @@ for page in pdf.pages:
         bounding_box = (50, 310, 320, 560)
         page_crop = page.within_bbox(bounding_box)
 
-        page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")
+        # page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")
 
         table_settings = {
             "vertical_strategy": "lines",
