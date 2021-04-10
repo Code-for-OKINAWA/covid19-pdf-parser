@@ -4,14 +4,9 @@ import requests
 import urllib.request
 import codecs
 import os
-from bs4 import BeautifulSoup
-
-from fpdf import FPDF
-from PyPDF2 import PdfFileWriter, PdfFileReader
 
 import re
 import sys
-import pdfplumber
 import pandas as pd
 import time
 
