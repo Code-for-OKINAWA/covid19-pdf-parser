@@ -1,10 +1,10 @@
-name: Extract PDF data
+name: Process official CSV
 
 on:
   push:
   pull_request:
   schedule:
-    - cron: '8 * * * *'
+    - cron: '8 19,20,21,22,23,0 * * *'
 
 jobs:
   build:
@@ -24,31 +24,10 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2 numpy==1.18.0
-    - name: Download and Preprocess missing lines
-      run: |
-        python3 auto_dl_process.py
-    - name: Commit pdf
-      run: |
-        git config --local user.email "amouro@gmail.com"
-        git config --local user.name "amouro"
-        git add component
-        git add pdf
-        git diff-index --quiet HEAD || git commit -m "[BOT] Update processed pdf"
+        pip install requests pandas numpy==1.18.0
     - name: Build Case CSV
       run: |
         python3 auto_csv_parser.py
-    - name: Commit files
-      run: |
-        git config --local user.email "amouro@gmail.com"
-        git config --local user.name "amouro"
-        git add component
-        git add data
-        git add pdf
-        git diff-index --quiet HEAD || git commit -m "[BOT] Update auto_output.csv"
-    - name: Build Summary CSV
-      run: |
-        python3 auto_summary_parser.py
     - name: Commit files
       run: |
         git config --local user.email "amouro@gmail.com"

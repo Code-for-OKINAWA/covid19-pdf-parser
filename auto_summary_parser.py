@@ -24,10 +24,10 @@ table_settings = {
     "horizontal_strategy": "lines",
     "snap_tolerance": 3,
 }
-im = page_crop.to_image(resolution=200)
-im.reset().draw_hline(780, stroke='black', stroke_width=3)
-im.debug_tablefinder(table_settings)
-im.save("summary.png", format="PNG")
+# im = page_crop.to_image(resolution=200)
+# im.reset().draw_hline(780, stroke='black', stroke_width=3)
+# im.debug_tablefinder(table_settings)
+# im.save("./snapshot/summary.png", format="PNG")
 
 summaryTable = page_crop.extract_table(table_settings)
 
