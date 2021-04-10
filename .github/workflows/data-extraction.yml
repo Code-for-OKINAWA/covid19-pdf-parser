@@ -35,9 +35,20 @@ jobs:
         git add component
         git add pdf
         git diff-index --quiet HEAD || git commit -m "[BOT] Update processed pdf"
-    - name: Build CSV
+    - name: Build Case CSV
       run: |
-        python3 auto_parser.py
+        python3 auto_csv_parser.py
+    - name: Commit files
+      run: |
+        git config --local user.email "amouro@gmail.com"
+        git config --local user.name "amouro"
+        git add component
+        git add data
+        git add pdf
+        git diff-index --quiet HEAD || git commit -m "[BOT] Update auto_output.csv"
+    - name: Build Summary CSV
+      run: |
+        python3 auto_summary_parser.py
     - name: Commit files
       run: |
         git config --local user.email "amouro@gmail.com"
