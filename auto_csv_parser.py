@@ -4,16 +4,25 @@ import requests
 import urllib.request
 import codecs
 import os
+from bs4 import BeautifulSoup
 
 import re
 import sys
 import pandas as pd
 import time
 
+# Retrieve html
+domain = 'https://www.pref.okinawa.lg.jp'
+url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
+response = requests.get(url)
+
+## Get file link and change file name
+soup = BeautifulSoup(response.text, "html.parser")
+link = soup.find(id="tmp_contents").find('a', href = re.compile(r'.*documents\/\d+youseisyaitiran.*'))['href']
+
 # DOWNLOAD FILE
 domain = 'https://www.pref.okinawa.lg.jp'
-path = '/site/hoken/chiikihoken/kekkaku/press/documents/youseisyaitiran.csv'
-csv_url = domain + path
+csv_url = domain + link
 
 def remove_invisible_chars(chars):
     for char in chars:
