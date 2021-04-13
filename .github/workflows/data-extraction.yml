@@ -1,10 +1,10 @@
 name: Extract PDF data
 
 on:
-  push:
-  pull_request:
-  schedule:
-    - cron: '8 10,11,12,13,14,15 * * *'
+  workflow_run:
+    workflows: ["Process official CSV"]
+    types:
+      - completed
 
 jobs:
   build:
