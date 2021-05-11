@@ -14,7 +14,7 @@ import time
 
 # DOWNLOAD FILE
 domain = 'https://www.pref.okinawa.lg.jp'
-url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
+url = domain + '/site/hoken/kansen/soumu/press/20200214_covid19_pr1.html'
 response = requests.get(url)
 
 def remove_invisible_chars(chars):

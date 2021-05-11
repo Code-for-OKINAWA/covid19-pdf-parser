@@ -13,7 +13,7 @@ import time
 
 # Retrieve html
 domain = 'https://www.pref.okinawa.lg.jp'
-url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
+url = domain + '/site/hoken/kansen/soumu/press/20200214_covid19_pr1.html'
 response = requests.get(url)
 
 ## Get file link and change file name
