@@ -14,7 +14,7 @@ import time
 
 # DOWNLOAD FILE
 domain = 'https://www.pref.okinawa.lg.jp'
-url = domain + '/site/hoken/kansen/soumu/press/20200214_covid19_pr1.html'
+url = domain + '/site/hoken/chiikihoken/kekkaku/press/20200214_covid19_pr1.html'
 response = requests.get(url)
 
 def remove_invisible_chars(chars):
@@ -44,28 +44,28 @@ linePDF = FPDF()
 ### Page with lines for summary table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(37.5, 102.5, 0.25, 69,'F')
+linePDF.rect(35.5, 105.5, 0.25, 71.5,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(65, 102.5, 0.25, 69,'F')
+linePDF.rect(64, 105.5, 0.25, 71.5,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(76, 102.5, 0.25, 69,'F')
+linePDF.rect(75, 105.5, 0.25, 71.5,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(93, 102.5, 0.25, 60,'F')
+linePDF.rect(93, 105.5, 0.25, 61,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(105, 102.5, 0.25, 60,'F')
+linePDF.rect(105, 105.5, 0.25, 61,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(37.5, 167, 38.5, 0.25,'F')
+linePDF.rect(35.5, 172, 39.5, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(37.5, 171.5, 38.5, 0.25,'F')
+linePDF.rect(35.5, 176.5, 39.5, 0.25,'F')
 
 ### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(32,275,160,0.5,'F')
+linePDF.rect(32,282,160,0.5,'F')
 linePDF.add_page()
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(32,281.5,160,0.5,'F')
+linePDF.rect(32,288.5,160,0.5,'F')
 linePDF.output('component/line.pdf', 'F')
 
 ## Add lines to every page
