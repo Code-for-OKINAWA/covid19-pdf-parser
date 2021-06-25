@@ -24,7 +24,7 @@ def remove_invisible_chars(chars):
 
 ## Get file link and change file name
 soup = BeautifulSoup(response.text, "html.parser")
-link = soup.find(id="tmp_contents").find_all('a')[0]['href']
+link = soup.find(id="tmp_contents").find_all('a')[1]['href']
 
 # find_pattern = r"\/documents\/(?P<report>\d*)\D*(?P<cases>\d*)\D*.pdf"
 # replace_pattern = lambda number: number.group('report') + '_' + number.group('cases') + '.pdf'
@@ -44,7 +44,7 @@ linePDF = FPDF()
 ### Page with lines for summary table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(37, 102.5, 0.25, 68,'F')
+linePDF.rect(37.5, 102.5, 0.25, 68,'F')
 linePDF.set_fill_color(0,0,0)
 linePDF.rect(65, 102.5, 0.25, 68,'F')
 linePDF.set_fill_color(0,0,0)
