@@ -1,3 +1,4 @@
+
 # pip install requests BeautifulSoup4 pdfplumber pandas pypdf2 fpdf2
 from datetime import datetime,timezone,timedelta
 import re
@@ -14,7 +15,7 @@ page = pdf.pages[0]
 # Start convert Summary from page 1
 
 # bounding_box = (50, 405, 360, 710)
-bounding_box = (50, 290, 320, 520)
+bounding_box = (50, 280, 320, 500)
 page_crop = page.within_bbox(bounding_box)
 
 # page_crop.to_image(resolution=200).save("./snapshot/summary_crop.png", format="PNG")

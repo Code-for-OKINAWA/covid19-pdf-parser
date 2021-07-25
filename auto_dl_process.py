@@ -44,20 +44,20 @@ linePDF = FPDF()
 ### Page with lines for summary table
 linePDF.add_page(orientation='P', format='A4')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(38, 102.5, 0.25, 69,'F')
+linePDF.rect(38, 101.2, 0.25, 72,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(65, 102.5, 0.25, 69,'F')
+linePDF.rect(66, 101.2, 0.25, 72,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(76, 102.5, 0.25, 69,'F')
+linePDF.rect(77, 101.2, 0.25, 72,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(96, 102.5, 0.25, 61,'F')
+linePDF.rect(97, 101.2, 0.25, 63,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(106, 102.5, 0.25, 61,'F')
+linePDF.rect(106.5, 101.2, 0.25, 63,'F')
 
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(38, 167, 38, 0.25,'F')
+linePDF.rect(38, 168, 39, 0.25,'F')
 linePDF.set_fill_color(0,0,0)
-linePDF.rect(38, 171.5, 38, 0.25,'F')
+linePDF.rect(38, 173, 39, 0.25,'F')
 
 ### Page with lines for cases table
 linePDF.add_page(orientation='P', format='A4')
@@ -84,7 +84,7 @@ for pageNum in range(sourcePDF.numPages):
     else:
         linePlace = linePDF.getPage(2)
 
-    if pageNum == 0 or pageNum >= 2:
+    if pageNum == 0: #or pageNum >= 2:
         currentPage = sourcePDF.getPage(pageNum)
         currentPage.mergePage(linePlace)
         outputPDF.addPage(currentPage)
