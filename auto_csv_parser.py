@@ -67,6 +67,11 @@ urllib.request.urlretrieve(csv_url, filepath)
 utf8_csv = convert_to_utf8(filefolder, filename)
 print("CSV downloaded at: " + filepath)
 
+
+## Existing CSV
+orgCSV = 'data/auto_output.csv'
+orgDf = pd.read_csv(orgCSV, sep=',', encoding='utf_8', dtype={'確定陽性者': object})
+
 ## Process CSV
 csvDf = pd.read_csv(utf8_csv, sep=',', encoding="utf_8")
 csvDf.columns=csvDf.columns.str.replace('\n','')
@@ -104,9 +109,14 @@ if not indexNames8.empty:
     indexNames.extend(indexNames8.to_list())
 csvDf.drop(indexNames , inplace=True)
 
-# Create a report
+## merge announced date
 utcNow = datetime.utcnow().replace(tzinfo=timezone.utc)
 jstNow = utcNow.astimezone(timezone(timedelta(hours=9))) # Change Timezone to JST
+
+csvDf = pd.merge(csvDf, orgDf[['確定陽性者', '公表日']], on='確定陽性者', how='left')
+csvDf['公表日'] = csvDf['公表日'].fillna(jstNow.strftime("%Y/%m/%d"))
+
+# Create a report
 
 current_time = jstNow.strftime("%H:%M:%S")
 missing_rows = find_missing(list(csvDf['確定陽性者']), int(csvDf.iat[0,0]))
