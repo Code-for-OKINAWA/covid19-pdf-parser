@@ -24,7 +24,7 @@ def remove_invisible_chars(chars):
 
 ## Get file link and change file name
 soup = BeautifulSoup(response.text, "html.parser")
-link = soup.find(id="tmp_contents").find_all('a')[1]['href']
+link = soup.find(id="tmp_contents").find_all('a')[2]['href']
 
 # find_pattern = r"\/documents\/(?P<report>\d*)\D*(?P<cases>\d*)\D*.pdf"
 # replace_pattern = lambda number: number.group('report') + '_' + number.group('cases') + '.pdf'
