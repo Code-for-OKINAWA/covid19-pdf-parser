@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install requests BeautifulSoup4 pandas numpy==1.18.0
+        pip install requests BeautifulSoup4 pandas numpy
     - name: Build Case CSV
       run: |
         python3 auto_csv_parser.py
