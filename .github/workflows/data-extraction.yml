@@ -1,10 +1,10 @@
 name: Extract PDF data
 
 on:
-  workflow_run:
-    workflows: ["Process official CSV"]
-    types:
-      - completed
+  # workflow_run:
+    # workflows: ["Process official CSV"]
+    # types:
+      # - completed
 
 jobs:
   build:
