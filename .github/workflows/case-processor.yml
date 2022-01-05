@@ -1,10 +1,10 @@
 name: Process official CSV
 
 on:
-  push:
-  pull_request:
-  schedule:
-    - cron: '8 10,11,12,13,14,15 * * *'
+  # push:
+  # pull_request:
+  # schedule:
+    # - cron: '8 10,11,12,13,14,15 * * *'
 
 jobs:
   build:
